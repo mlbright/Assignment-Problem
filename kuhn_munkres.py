@@ -40,6 +40,7 @@
     updating of min_slack costs O(n).
 """
 
+
 def improve_labels(val):
     """ change the labels, and maintain min_slack. """
     for u in S:
@@ -50,6 +51,7 @@ def improve_labels(val):
         else:
             min_slack[v][0] -= val
 
+
 def improve_matching(v):
     """ apply the alternating path from v to the root in the tree. """
     u = T[v]
@@ -58,8 +60,10 @@ def improve_matching(v):
     Mu[u] = v
     Mv[v] = u
 
+
 def slack(u,v):
     return lu[u] + lv[v] - w[u][v]
+
 
 def augment():
     """ augment the matching, possibly improving the labels on the way. """
@@ -76,12 +80,13 @@ def augment():
             u1 = Mv[v]                      # matched edge, 
             assert not u1 in S
             S.add(u1)
-            for v in V:                     # maintain min_slack
+            for v in V: # maintain min_slack
                 if v not in T and min_slack[v][0] > slack(u1,v):
                     min_slack[v] = [slack(u1,v), u1]
         else:
-            improve_matching(v)              # v is a free vertex
+            improve_matching(v) # v is a free vertex
             return
+
 
 def assign(weights):
     """
@@ -94,7 +99,7 @@ def assign(weights):
     n  = len(w)
     U  = V = range(n)
     lu = [ max([w[u][v] for v in V]) for u in U]  # start with trivial labels
-    lv = [ 0                         for v in V]
+    lv = [ 0 for v in V]
     Mu = {}                                       # start with empty matching
     Mv = {}
     while len(Mu) < n:
@@ -113,6 +118,6 @@ if __name__ == "__main__":
 
     # a small example 
     print assign([[1,2,3,4],[2,4,6,8],[3,6,9,12],[4,8,12,16]])
-    # even smaller example
+    # even smaller examples
     print assign([[1,2,3],[3,3,3],[3,3,2]])
     print assign([[7,4,3],[3,1,2],[3,0,0]])
