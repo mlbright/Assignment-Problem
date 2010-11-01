@@ -4,6 +4,7 @@
 # Kuhn-Munkres, The hungarian algorithm.  Complexity O(n^3)
 # Computes a max weight perfect matching in a bipartite graph
 # for min weight matching, simply negate the weights.
+# http://www.enseignement.polytechnique.fr/informatique/INF441/INF441b/code/kuhnMunkres.py
 
 """ Global variables:
        n = number of vertices on each side
