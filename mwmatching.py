@@ -1,3 +1,7 @@
+"""
+From: http://www.xs4all.nl/~rjoris/maximummatching.html
+"""
+
 """Weighted maximum matching in general graphs.
 
 The algorithm is taken from "Efficient Algorithms for Finding Maximum
