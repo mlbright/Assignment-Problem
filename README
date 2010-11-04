@@ -1,2 +1,9 @@
 Various things related to the Assignment Problem, a.k.a. the
 maximum weight perfect matching in a weighted bipartite graph
+
+Also, there's some code for the more general maximum weight matching
+(not a perfect matching) problem, obtained from
+
+http://www.xs4all.nl/~rjoris/maximummatching.html
+
+Thank you Joris van Rantwijk.
