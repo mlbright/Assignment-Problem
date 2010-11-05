@@ -12,3 +12,4 @@ pod2htm*.tmp
 Algorithm-Kuhn-Munkres-*
 .git
 .gitignore
+*.swp
