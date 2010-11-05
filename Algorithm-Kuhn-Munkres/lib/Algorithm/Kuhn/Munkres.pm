@@ -3,18 +3,18 @@ package Algorithm::Kuhn::Munkres;
 use warnings;
 use strict;
 use Carp;
+use List::Util qw( sum );
 use base 'Exporter';
-our EXPORT_OK = qw( max_weight_perfect_matching assign );
-use List::Utils qw( reduce );
+our @EXPORT_OK = qw( max_weight_perfect_matching assign );
+our $VERSION = '0.0.3';
 
-use version; $VERSION = qv('0.0.3');
-
-my @S;
+my %S;
+my @U;
 my @V;
 my %T;
-my %labels_u;
-my %labels_v;
-my %min_slack;
+my @labels_u;
+my @labels_v;
+my @min_slack;
 my %matching_u;
 my %matching_v;
 my @weights;
@@ -23,19 +23,18 @@ my @weights;
 sub _improve_labels {
     my ($val) = @_;
 
-    foreach my $u (@S) {
-        $labels_u{$u} -= $val;
+    foreach my $u (keys %S) {
+        $labels_u[$u] -= $val;
     }
 
     foreach my $v (@V) {
-        if (exists($T{$v}) {
-            $labels_v{$v} += $val;
+        if (exists($T{$v})) {
+            $labels_v[$v] += $val;
         } else {
-            $min_slack{$v}->[0] -= $val;
+            $min_slack[$v]->[0] -= $val;
         }
     }
 }
-
 
 sub _improve_matching {
     my ($v) = @_;
@@ -47,26 +46,90 @@ sub _improve_matching {
     $matching_v{$v} = $u;
 }
 
-sub slack {
+sub _slack {
     my ($u,$v) = @_;
-    return ($labels_u{$u} + $labels_v{$v} - $weights[$u][$v]);
+    my $val = $labels_u[$u] + $labels_v[$v] - $weights[$u][$v];
+    return $val;
 }
 
 sub _augment {
 
     while (1) {
-        my @tmp;
-        foreach my $v (@V) {
-            if (!exists($T{$v})) {
-                my $x = [ min_slack{$v}, $v ];
-                push @tmp, $x;
+        my ($val, $u, $v);
+        foreach my $x (@V) {
+            if (!exists($T{$x})) {
+                if (!defined($val) || ($min_slack[$x]->[0] < $val)) {
+                    $val = $min_slack[$x]->[0]; 
+                    $u = $min_slack[$x]->[1];
+                    $v = $x;
+                }
             }
+        }
+        die "wtf" if (!exists($S{$u}));
+        if ($val > 0) {
+            _improve_labels($val);
+        }
+        die "wtf2" if (_slack($u,$v) != 0);
+        $T{$v} = $u;
+        if (exists($matching_v{$v})) {
+            my $u1 = $matching_v{$v};
+            die "wtf3" if (exists($S{$u1}));
+            $S{$u1} = 1;
+            foreach my $x (@V) {
+                my $s = _slack($u1,$x);
+                if (!exists($T{$x}) && $min_slack[$x]->[0] > $s) {
+                    $min_slack[$x] = [$s, $u1];
+                }
+            }                 
+        } else {
+            _improve_matching($v);
+            return;
         }
     }
 
 }
 
 sub max_weight_perfect_matching {
+
+    @weights = @_;
+    my $n = scalar @weights;
+    @V = (0..$n); 
+    @U = (0..$n);
+    foreach my $i (@V) {
+        $labels_v[$i] = 0;    
+    }
+    foreach my $u (@U) {
+        my $max = 0;
+        foreach my $v (@V) {
+            if ($weights[$u][$v] > $max) {
+                $max = $weights[$u][$v];
+            }        
+        }
+        $labels_u[$u] = $max;
+    }    
+
+
+    while ($n > scalar %matching_u) {
+        my $free;
+        foreach my $x (@V) {
+            if (!exists($matching_u{$x})) {
+                $free = $x;
+                last;
+            }                         
+        }
+
+        %S = ($free => 1);
+        %T = ();
+        @min_slack = ();
+        foreach my $v (@V) {
+            my $i = [slack($free,$v), $free];
+            push @min_slack, $i;
+        }
+        augment();
+    }
+
+    my $val = sum(@labels_u) + sum(@labels_v);
+    return (\%matching_u,$val);
 
 }
 
