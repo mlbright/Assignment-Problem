@@ -93,8 +93,10 @@ sub max_weight_perfect_matching {
 
     @weights = @_;
     my $n = scalar @weights;
-    @V = (0..$n); 
-    @U = (0..$n);
+    for(my $i = 0; $i < $n; $i++) {
+        push @V, $i;
+        push @U, $i;
+    }
     foreach my $i (@V) {
         $labels_v[$i] = 0;    
     }
@@ -122,10 +124,10 @@ sub max_weight_perfect_matching {
         %T = ();
         @min_slack = ();
         foreach my $v (@V) {
-            my $i = [slack($free,$v), $free];
+            my $i = [_slack($free,$v), $free];
             push @min_slack, $i;
         }
-        augment();
+        _augment();
     }
 
     my $val = sum(@labels_u) + sum(@labels_v);
