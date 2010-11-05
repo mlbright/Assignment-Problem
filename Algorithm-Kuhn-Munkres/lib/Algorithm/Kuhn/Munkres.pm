@@ -131,7 +131,7 @@ sub max_weight_perfect_matching {
     }
 
     my $val = sum(@labels_u) + sum(@labels_v);
-    return (\%matching_u,$val);
+    return ($val, \%matching_u);
 
 }
 

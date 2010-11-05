@@ -94,15 +94,15 @@ def assign(weights):
     returns the mappings Mu : U -> V, Mv : V -> U,
     encoding the matching as well as the value of it.
     """
-    global U,V,S,T,Mu,Mv,lu,lv,min_slack,w
+    global U,V,S,T,Mu,Mv,lu,lv,min_slack,w,N
     w  = weights
-    n  = len(w)
-    U  = V = range(n)
+    N  = len(w)
+    U  = V = range(N)
     lu = [ max([w[u][v] for v in V]) for u in U]  # start with trivial labels
     lv = [ 0 for v in V]
     Mu = {}                                       # start with empty matching
     Mv = {}
-    while len(Mu) < n:
+    while len(Mu) < N:
         u0 = [u for u in V if u not in Mu][0] # choose free vertex u0
         #S = {u0: True}                        # grow tree from u0 on
         S = set([u0])
