@@ -3,30 +3,88 @@ package Algorithm::Kuhn::Munkres;
 use warnings;
 use strict;
 use Carp;
+use base 'Exporter';
+our EXPORT_OK = qw( max_weight_perfect_matching assign );
+use List::Utils qw( reduce );
 
 use version; $VERSION = qv('0.0.3');
 
-# Other recommended modules (uncomment to use):
-#  use IO::Prompt;
-#  use Perl6::Export;
-#  use Perl6::Slurp;
-#  use Perl6::Say;
+my @S;
+my @V;
+my %T;
+my %labels_u;
+my %labels_v;
+my %min_slack;
+my %matching_u;
+my %matching_v;
+my @weights;
 
 
-# Module implementation here
+sub _improve_labels {
+    my ($val) = @_;
 
+    foreach my $u (@S) {
+        $labels_u{$u} -= $val;
+    }
+
+    foreach my $v (@V) {
+        if (exists($T{$v}) {
+            $labels_v{$v} += $val;
+        } else {
+            $min_slack{$v}->[0] -= $val;
+        }
+    }
+}
+
+
+sub _improve_matching {
+    my ($v) = @_;
+    my $u = $T{$v};
+    if (exists($matching_u{$u})) {
+        _improve_matching($matching_u{$u});
+    }
+    $matching_u{$u} = $v;
+    $matching_v{$v} = $u;
+}
+
+sub slack {
+    my ($u,$v) = @_;
+    return ($labels_u{$u} + $labels_v{$v} - $weights[$u][$v]);
+}
+
+sub _augment {
+
+    while (1) {
+        my @tmp;
+        foreach my $v (@V) {
+            if (!exists($T{$v})) {
+                my $x = [ min_slack{$v}, $v ];
+                push @tmp, $x;
+            }
+        }
+    }
+
+}
+
+sub max_weight_perfect_matching {
+
+}
+
+sub assign {
+    max_weight_perfect_matching(@_);
+}
 
 1; # Magic true value required at end of module
 __END__
 
 =head1 NAME
 
-Algorithm::Kuhn::Munkres - [One line description of module's purpose here]
+Algorithm::Kuhn::Munkres - Determining the maximum weight perfect matching in a weighted complete bipartite graph
 
 
 =head1 VERSION
 
-This document describes Algorithm::Kuhn::Munkres version 0.0.1
+This document describes Algorithm::Kuhn::Munkres version 0.0.3
 
 
 =head1 SYNOPSIS
