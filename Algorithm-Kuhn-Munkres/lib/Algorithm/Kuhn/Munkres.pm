@@ -8,6 +8,7 @@ use base 'Exporter';
 our @EXPORT_OK = qw( max_weight_perfect_matching assign );
 our $VERSION = '0.0.3';
 
+my @weights;
 my $N;
 my %S;
 my %T;
@@ -16,7 +17,6 @@ my @labels_v;
 my @min_slack;
 my %matching_u;
 my %matching_v;
-my @weights;
 
 
 sub _improve_labels {
@@ -89,6 +89,14 @@ sub _augment {
 }
 
 sub max_weight_perfect_matching {
+
+    %S = ();
+    %T = ();
+    @labels_u = ();
+    @labels_v = ();
+    @min_slack = ();
+    %matching_u = ();
+    %matching_v = ();
 
     @weights = @_;
     $N = scalar @weights;
