@@ -98,8 +98,8 @@ def assign(weights):
     w  = weights
     N  = len(w)
     U  = V = range(N)
-    lu = [ max([w[u][v] for v in V]) for u in U]  # start with trivial labels
-    lv = [ 0 for v in V]
+    lu = [max([w[u][v] for v in V]) for u in U]  # start with trivial labels
+    lv = [0 for v in V]
     Mu = {}                                       # start with empty matching
     Mv = {}
     while len(Mu) < N:

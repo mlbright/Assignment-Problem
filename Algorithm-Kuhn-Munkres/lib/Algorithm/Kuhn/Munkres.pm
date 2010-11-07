@@ -150,7 +150,6 @@ sub _show_hash {
     }
     $output =~ s/, $//;
     $output .= "}";
-    print "$output\n";
     return $output;
 }
 

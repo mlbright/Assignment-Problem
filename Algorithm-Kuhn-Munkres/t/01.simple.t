@@ -29,4 +29,4 @@ ok($cost == -6);
 );
 ($cost,$mapping) = assign(@matrix);
 ok($cost == 543);
-ok(Algorithm::Kuhn::Munkres::_show_hash($mapping) eq "{0: 4, 1: 1, 2: 3, 3: 2, 4: 0, 5: 5}", Algorithm::Kuhn::Munkres::_show_hash($mapping));
+ok(Algorithm::Kuhn::Munkres::_show_hash($mapping) eq "{0: 4, 1: 1, 2: 3, 3: 2, 4: 0, 5: 5}");
