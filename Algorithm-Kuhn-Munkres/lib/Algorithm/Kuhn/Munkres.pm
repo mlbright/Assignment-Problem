@@ -142,6 +142,18 @@ sub assign {
     max_weight_perfect_matching(@_);
 }
 
+sub _show_hash {
+    my ($hash_ref) = @_;
+    my $output = "{";
+    foreach my $key (sort keys %$hash_ref) {
+        $output .= "$key" . ": " . $hash_ref->{$key} . ", "; 
+    }
+    $output =~ s/, $//;
+    $output .= "}";
+    print "$output\n";
+    return $output;
+}
+
 1; # Magic true value required at end of module
 __END__
 

@@ -1,6 +1,6 @@
 #!perl -T
 
-use Test::Simple tests => 5;
+use Test::Simple tests => 6;
 use Algorithm::Kuhn::Munkres qw( assign );
 
 my @matrix = ([1,2,3,4],[2,4,6,8],[3,6,9,12],[4,8,12,16]);
@@ -29,3 +29,4 @@ ok($cost == -6);
 );
 ($cost,$mapping) = assign(@matrix);
 ok($cost == 543);
+ok(Algorithm::Kuhn::Munkres::_show_hash($mapping) eq "{0: 4, 1: 1, 2: 3, 3: 2, 4: 0, 5: 5}", Algorithm::Kuhn::Munkres::_show_hash($mapping));
