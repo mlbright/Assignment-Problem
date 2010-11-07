@@ -161,8 +161,6 @@ This document describes Algorithm::Kuhn::Munkres version 0.0.3
   
 =head1 DESCRIPTION
 
-=for author to fill in:
-
     Implementation of the Kuhn-Munkres algorithm. This algorithm finds the maximum weight
     perfect matching in a weighted complete bipartite graph. This problem is known as 
     the "Assignment Problem".
@@ -176,6 +174,8 @@ This document describes Algorithm::Kuhn::Munkres version 0.0.3
 Determines the maximum weight perfect matching in a weighted complete bipartite graph.
 The single argument is a matrix representing the weights of the edges in the bipartite graph.
 The matrix must be implemented as a list of array objects.
+The output is a tuple consisting of the total weight (cost) of the perfect matching, and
+a reference to a hash representing edges in the mapping.
 
     use Algorithm::Kuhn::Munkres;
 
