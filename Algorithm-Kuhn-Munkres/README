@@ -1,19 +1,7 @@
-Algorithm-Kuhn-Munkres version 0.0.1
+Algorithm-Kuhn-Munkres version 0.0.3
 
-[ REPLACE THIS...
-
-  The README is used to introduce the module and provide instructions on
-  how to install the module, any machine dependencies it may have (for
-  example C compilers and installed libraries) and any other information
-  that should be understood before the module is installed.
-
-  A README file is required for CPAN modules since CPAN extracts the
-  README file from a module distribution so that people browsing the
-  archive can use it get an idea of the modules uses. It is usually a
-  good idea to provide version information here so that people can
-  decide whether fixes for the module are worth downloading.
-]
-
+Implementation of the Kuhn-Munkres algorithm to determine a maximum weight
+perfect matching in a weighted complete bipartite graph.
 
 INSTALLATION
 
@@ -34,7 +22,7 @@ Alternatively, to install with Module::Build, you can use the following commands
 
 DEPENDENCIES
 
-None.
+List::Util
 
 
 COPYRIGHT AND LICENCE
