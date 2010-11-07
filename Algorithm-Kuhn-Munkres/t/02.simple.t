@@ -5,4 +5,4 @@ use Algorithm::Kuhn::Munkres qw( assign );
 
 my @matrix = ([1,2,3],[3,3,3],[3,3,2]);
 my ($cost,$mapping) = assign(@matrix);
-ok($cost eq '9');
+ok($cost == 9);
