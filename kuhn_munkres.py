@@ -121,3 +121,4 @@ if __name__ == "__main__":
     # even smaller examples
     print assign([[1,2,3],[3,3,3],[3,3,2]])
     print assign([[7,4,3],[3,1,2],[3,0,0]])
+    print assign([[-1,-2,-3],[-3,-3,-3],[-3,-3,-2]])
