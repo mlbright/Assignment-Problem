@@ -8,9 +8,8 @@ use base 'Exporter';
 our @EXPORT_OK = qw( max_weight_perfect_matching assign );
 our $VERSION = '0.0.3';
 
+my $N;
 my %S;
-my @U;
-my @V;
 my %T;
 my @labels_u;
 my @labels_v;
@@ -27,7 +26,7 @@ sub _improve_labels {
         $labels_u[$u] -= $val;
     }
 
-    foreach my $v (@V) {
+    for (my $v = 0; $v < $N; $v++) {
         if (exists($T{$v})) {
             $labels_v[$v] += $val;
         } else {
@@ -56,7 +55,7 @@ sub _augment {
 
     while (1) {
         my ($val, $u, $v);
-        foreach my $x (@V) {
+        for (my $x = 0; $x < $N; $x++) {
             if (!exists($T{$x})) {
                 if (!defined($val) || ($min_slack[$x]->[0] < $val)) {
                     $val = $min_slack[$x]->[0]; 
@@ -75,7 +74,7 @@ sub _augment {
             my $u1 = $matching_v{$v};
             die "wtf3" if (exists($S{$u1}));
             $S{$u1} = 1;
-            foreach my $x (@V) {
+            for (my $x = 0; $x < $N; $x++) {
                 my $s = _slack($u1,$x);
                 if (!exists($T{$x}) && $min_slack[$x]->[0] > $s) {
                     $min_slack[$x] = [$s, $u1];
@@ -92,28 +91,24 @@ sub _augment {
 sub max_weight_perfect_matching {
 
     @weights = @_;
-    my $n = scalar @weights;
-    for(my $i = 0; $i < $n; $i++) {
-        push @V, $i;
-        push @U, $i;
-    }
-    foreach my $i (@V) {
+    $N = scalar @weights;
+    for (my $i = 0; $i < $N; $i++) {
         $labels_v[$i] = 0;    
     }
-    foreach my $u (@U) {
+    for (my $i = 0; $i < $N; $i++) {
         my $max = 0;
-        foreach my $v (@V) {
-            if ($weights[$u][$v] > $max) {
-                $max = $weights[$u][$v];
+        for (my $j = 0; $j < $N; $j++) {
+            if ($weights[$i][$j] > $max) {
+                $max = $weights[$i][$j];
             }        
         }
-        $labels_u[$u] = $max;
+        $labels_u[$i] = $max;
     }    
 
 
-    while ($n > scalar %matching_u) {
+    while ($N > scalar keys %matching_u) {
         my $free;
-        foreach my $x (@V) {
+        for (my $x = 0; $x < $N; $x++) {
             if (!exists($matching_u{$x})) {
                 $free = $x;
                 last;
@@ -123,9 +118,9 @@ sub max_weight_perfect_matching {
         %S = ($free => 1);
         %T = ();
         @min_slack = ();
-        foreach my $v (@V) {
-            my $i = [_slack($free,$v), $free];
-            push @min_slack, $i;
+        for (my $i = 0; $i < $N; $i++) {
+            my $x = [_slack($free,$i), $free];
+            push @min_slack, $x;
         }
         _augment();
     }
