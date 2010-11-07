@@ -6,6 +6,8 @@ README
 lib/Algorithm/Kuhn/Munkres.pm
 t/00.load.t
 t/01.simple.t
+t/02.simple.t
+t/03.simple.t
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t
