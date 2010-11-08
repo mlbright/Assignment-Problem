@@ -7,3 +7,4 @@ blib
 Algorithm-Kuhn-Munkres-v0.0.3.tar.gz
 MANIFEST.SKIP
 META.yml
+*.gz
