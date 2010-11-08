@@ -206,7 +206,7 @@ Synonym for max_weight_perfect_matching
 
 =head1 DIAGNOSTICS
 
-    Ideally, I would every single error and warning message that the module can
+    Ideally, I would list every single error and warning message that the module can
     generate (even the ones that will "never happen"), with a full
     explanation of each problem, one or more likely causes, and any
     suggested remedies. I'm not that good a person right now.
