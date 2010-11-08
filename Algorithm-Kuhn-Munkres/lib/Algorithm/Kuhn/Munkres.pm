@@ -6,7 +6,7 @@ use Carp;
 use List::Util qw( sum );
 use base 'Exporter';
 our @EXPORT_OK = qw( max_weight_perfect_matching assign );
-our $VERSION = '1.0.1';
+our $VERSION = '1.0.3';
 
 my @weights;
 my $N;
@@ -64,15 +64,15 @@ sub _augment {
                 }
             }
         }
-        die "wtf" if (!exists($S{$u}));
+        die "u should be in S" if (!exists($S{$u}));
         if ($val > 0) {
             _improve_labels($val);
         }
-        die "wtf2" if (_slack($u,$v) != 0);
+        die "slack(u,v) should be 0" if (_slack($u,$v) != 0);
         $T{$v} = $u;
         if (exists($matching_v{$v})) {
             my $u1 = $matching_v{$v};
-            die "wtf3" if (exists($S{$u1}));
+            die "u1 should not be in S" if (exists($S{$u1}));
             $S{$u1} = 1;
             for (my $x = 0; $x < $N; $x++) {
                 my $s = _slack($u1,$x);
@@ -163,7 +163,7 @@ Algorithm::Kuhn::Munkres - Determines the maximum weight perfect matching in a w
 
 =head1 VERSION
 
-This document describes Algorithm::Kuhn::Munkres version 1.0.1
+This document describes Algorithm::Kuhn::Munkres version 1.0.3
 
 
 =head1 SYNOPSIS
