@@ -45,7 +45,7 @@ def improve_labels(val):
     """ change the labels, and maintain min_slack. """
     for u in S:
         lu[u] -= val
-    for v in V:
+    for v in xrange(N):
         if v in T:
             lv[v] += val
         else:
@@ -69,7 +69,7 @@ def augment():
     """ augment the matching, possibly improving the labels on the way. """
     while True:
         # select edge (u,v) with u in S, v not in T and min slack
-        ((val, u), v) = min([(min_slack[v], v) for v in V if v not in T])
+        ((val, u), v) = min([(min_slack[v], v) for v in xrange(N) if v not in T])
         assert u in S
         if val > 0:        
             improve_labels(val)
@@ -80,7 +80,7 @@ def augment():
             u1 = Mv[v]                      # matched edge, 
             assert not u1 in S
             S.add(u1)
-            for v in V: # maintain min_slack
+            for v in xrange(N): # maintain min_slack
                 if v not in T and min_slack[v][0] > slack(u1,v):
                     min_slack[v] = [slack(u1,v), u1]
         else:
@@ -94,20 +94,18 @@ def assign(weights):
     returns the mappings Mu : U -> V, Mv : V -> U,
     encoding the matching as well as the value of it.
     """
-    global U,V,S,T,Mu,Mv,lu,lv,min_slack,w,N
+    global S,T,Mu,Mv,lu,lv,min_slack,w,N
     w  = weights
     N  = len(w)
-    U  = V = range(N)
-    lu = [max([w[u][v] for v in V]) for u in U]  # start with trivial labels
-    lv = [0 for v in V]
+    lu = [max([w[u][v] for v in xrange(N)]) for u in xrange(N)]  # start with trivial labels
+    lv = [0 for v in xrange(N)]
     Mu = {}                                       # start with empty matching
     Mv = {}
     while len(Mu) < N:
-        u0 = [u for u in V if u not in Mu][0] # choose free vertex u0
-        #S = {u0: True}                        # grow tree from u0 on
+        u0 = [u for u in xrange(N) if u not in Mu][0] # choose free vertex u0
         S = set([u0])
         T = {}
-        min_slack = [[slack(u0,v), u0] for v in V]
+        min_slack = [[slack(u0,v), u0] for v in xrange(N)]
         augment()
     # val. of matching is total edge weight
     val = sum(lu) + sum(lv)
