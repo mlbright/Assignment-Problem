@@ -6,7 +6,7 @@ use Carp;
 use List::Util qw( sum );
 use base 'Exporter';
 our @EXPORT_OK = qw( max_weight_perfect_matching assign );
-our $VERSION = '0.0.3';
+our $VERSION = '1.0.0';
 
 my @weights;
 my $N;
@@ -158,22 +158,18 @@ __END__
 
 =head1 NAME
 
-Algorithm::Kuhn::Munkres - Determining the maximum weight perfect matching in a weighted complete bipartite graph
+Algorithm::Kuhn::Munkres - Determines the maximum weight perfect matching in a weighted complete bipartite graph
 
 
 =head1 VERSION
 
-This document describes Algorithm::Kuhn::Munkres version 0.0.3
+This document describes Algorithm::Kuhn::Munkres version 1.0.0
 
 
 =head1 SYNOPSIS
 
     use Algorithm::Kuhn::Munkres;
 
-=for author to fill in:
-    
-    use Algorithm::Kuhn::Munkres;
-    
     my @matrix = ([1,2,3,4],[2,4,6,8],[3,6,9,12],[4,8,12,16]);
     my ($cost,$mapping) = assign(@matrix);
  
@@ -243,6 +239,15 @@ L<http://rt.cpan.org>.
 
 Martin-Louis Bright  C<< <mlbright@gmail.com> >>
 
+=head1 ACKNOWLEDGEMENTS
+
+This implementation is a translation of the python code at 
+http://www.enseignement.polytechnique.fr/informatique/INF441/INF441b/code/kuhnMunkres.py
+
+To understand the algorithm, the following web resources were invaluable:
+(http://www.cse.ust.hk/~golin/COMP572/Notes/Matching.pdf),
+(http://www.topcoder.com/tc?module=Static&d1=tutorials&d2=hungarianAlgorithm),
+(http://www.math.uwo.ca/~mdawes/courses/344/kuhn-munkres.pdf)
 
 =head1 LICENCE AND COPYRIGHT
 
