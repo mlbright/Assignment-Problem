@@ -14,3 +14,6 @@ Revision history for Algorithm-Kuhn-Munkres
 
 1.0.4 Mon Nov  8 21:51:20 EST 2010
     add testing dependencies
+
+1.0.5 Tue Nov  9 09:25:13 EST 2010
+    correcting testing dependencies

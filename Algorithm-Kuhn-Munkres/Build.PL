@@ -10,7 +10,7 @@ my $builder = Module::Build->new(
     requires => {
         'Test::More' => 0,
         'version'    => 0,
-        'Perl::Critic'    => 0,
+        'Test::Perl::Critic' => 0,
     },
     add_to_cleanup      => [ 'Algorithm-Kuhn-Munkres-*' ],
 );
