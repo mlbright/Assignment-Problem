@@ -1,4 +1,4 @@
-Algorithm-Kuhn-Munkres version 1.0.5
+Algorithm-Kuhn-Munkres version 1.0.6
 
 Implementation of the Kuhn-Munkres algorithm to determine a maximum weight
 perfect matching in a weighted complete bipartite graph.
