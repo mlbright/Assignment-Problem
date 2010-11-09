@@ -6,7 +6,7 @@ use Carp;
 use List::Util qw( sum );
 use base 'Exporter';
 our @EXPORT_OK = qw( max_weight_perfect_matching assign );
-our $VERSION = '1.0.3';
+our $VERSION = '1.0.4';
 
 my @weights;
 my $N;
@@ -163,7 +163,7 @@ Algorithm::Kuhn::Munkres - Determines the maximum weight perfect matching in a w
 
 =head1 VERSION
 
-This document describes Algorithm::Kuhn::Munkres version 1.0.3
+This document describes Algorithm::Kuhn::Munkres version 1.0.4
 
 
 =head1 SYNOPSIS
@@ -219,7 +219,7 @@ Algorithm::Kuhn::Munkres requires no configuration files or environment variable
 
 =head1 DEPENDENCIES
 
-List::Util
+List::Util, Perl::Critic::PBP
 
 =head1 INCOMPATIBILITIES
 
