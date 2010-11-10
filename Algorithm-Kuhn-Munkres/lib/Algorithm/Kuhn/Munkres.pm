@@ -6,7 +6,7 @@ use Carp;
 use List::Util qw( sum );
 use base 'Exporter';
 our @EXPORT_OK = qw( max_weight_perfect_matching assign );
-our $VERSION = '1.0.6';
+our $VERSION = '1.0.7';
 
 my @weights;
 my $N;
@@ -163,12 +163,12 @@ Algorithm::Kuhn::Munkres - Determines the maximum weight perfect matching in a w
 
 =head1 VERSION
 
-This document describes Algorithm::Kuhn::Munkres version 1.0.6
+This document describes Algorithm::Kuhn::Munkres version 1.0.7
 
 
 =head1 SYNOPSIS
 
-    use Algorithm::Kuhn::Munkres qw ( assign );
+    use Algorithm::Kuhn::Munkres qw( assign );
     my @matrix = ([1,2,3,4],[2,4,6,8],[3,6,9,12],[4,8,12,16]);
     my ($cost,$mapping) = assign(@matrix);
  
