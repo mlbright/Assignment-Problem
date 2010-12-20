@@ -23,7 +23,6 @@ Alternatively, to install with Module::Build, you can use the following commands
 DEPENDENCIES
 
 List::Util
-Test::Perl::Critic
 
 COPYRIGHT AND LICENCE
 

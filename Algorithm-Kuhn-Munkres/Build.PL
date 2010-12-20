@@ -9,7 +9,6 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/Algorithm/Kuhn/Munkres.pm',
     requires => {
         'Test::More' => 0,
-        'Test::Perl::Critic' => 0,
     },
     add_to_cleanup      => [ 'Algorithm-Kuhn-Munkres-*' ],
 );
